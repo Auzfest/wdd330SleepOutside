@@ -2,9 +2,14 @@ import { getLocalStorage } from "./utils.mjs";
 
 function renderCartContents() {
   var cartItems = getLocalStorage("so-cart");
+  if (cartItems === null || cartItems.length === 0) {
+    document.querySelector(".product-list").innerHTML = "Your cart is empty.";
+  }
+  else {
   cartItems = [cartItems];
   const htmlItems = cartItems.map((item) => cartItemTemplate(item));
   document.querySelector(".product-list").innerHTML = htmlItems.join("");
+  }
 }
 
 function cartItemTemplate(item) {
