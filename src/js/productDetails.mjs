@@ -15,7 +15,12 @@ export default async function productDetails(productID, selector) {
 
 function addToCart() {
     setLocalStorage("so-cart", product);
-}
+    const cart = document.querySelector(".cart");
+    cart.classList.add('animate');
+
+    cart.addEventListener('animationend', function() {
+        cart.classList.remove('animate');
+    }, { once: true });}
 
 function productDetailsTemplate(product) {
     return `<h3>${product.Brand.Name}</h3>
