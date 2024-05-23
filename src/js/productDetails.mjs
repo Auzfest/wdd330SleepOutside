@@ -5,12 +5,17 @@ let product = {};
 
 export default async function productDetails(productID, selector) {
     product = await findProductById(productID);
+    console.log(product);
     
     const el = document.querySelector(selector);
-    el.insertAdjacentHTML("afterBegin", productDetailsTemplate(product));
+    if (product === undefined) {
+      el.innerHTML = "Product not found";
+    }
+    else {
+      el.insertAdjacentHTML("afterBegin", productDetailsTemplate(product));
+      document.getElementById("addToCart").addEventListener("click", addToCart);
+    }
     
-    document.getElementById("addToCart").addEventListener("click", addToCart);
-
 }
 
 function addToCart() {
