@@ -1,5 +1,6 @@
 import { findProductById } from "./productData.mjs";
 import { setLocalStorage } from "./utils.mjs";
+import { cartCount } from "./stores.mjs";
 
 let product = {};
 
@@ -17,7 +18,6 @@ export default async function productDetails(productID, selector) {
     }
     
 }
-
 function addToCart() {
     setLocalStorage("so-cart", product);
     const cart = document.querySelector(".cart");
@@ -25,7 +25,11 @@ function addToCart() {
 
     cart.addEventListener('animationend', function() {
         cart.classList.remove('animate');
-    }, { once: true });}
+    }, { once: true });
+    cartCount.set(product.length);
+  }
+
+    
 
 function productDetailsTemplate(product) {
     return `<h3>${product.Brand.Name}</h3>
