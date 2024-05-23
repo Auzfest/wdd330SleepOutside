@@ -1,12 +1,12 @@
 import { findProductById } from "./productData.mjs";
-import { setLocalStorage } from "./utils.mjs";
+import { setLocalStorage, getLocalStorage } from "./utils.mjs";
+import { cartCount } from "./stores.mjs";
 
 let product = {};
 
 export default async function productDetails(productID, selector) {
     product = await findProductById(productID);
-    console.log(product);
-    
+
     const el = document.querySelector(selector);
     if (product === undefined) {
       el.innerHTML = "Product not found";
@@ -17,15 +17,27 @@ export default async function productDetails(productID, selector) {
     }
     
 }
-
 function addToCart() {
-    setLocalStorage("so-cart", product);
-    const cart = document.querySelector(".cart");
-    cart.classList.add('animate');
+  let cartContents = getLocalStorage("so-cart");
+  //check to see if there was anything there
+  if (!cartContents) {
+    cartContents = [];
+  }
+  // then add the current product to the list
+  cartContents.push(product);
+  setLocalStorage("so-cart", cartContents);
+  // update the visible cartCount
+  cartCount.set(cartContents.length);
+  const cart = document.querySelector(".cart");
+  cart.classList.add('animate');
 
-    cart.addEventListener('animationend', function() {
-        cart.classList.remove('animate');
-    }, { once: true });}
+  cart.addEventListener('animationend', function() {
+      cart.classList.remove('animate');
+  }, { once: true });
+
+  }
+
+    
 
 function productDetailsTemplate(product) {
     return `<h3>${product.Brand.Name}</h3>
