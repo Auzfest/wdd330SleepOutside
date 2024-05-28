@@ -133,6 +133,18 @@ button {
   animation-fill-mode: forwards;
 }
 
+.cart sup {
+  position: absolute;
+  top: 1px;
+  right: -0.5em;
+  background-color: var(--secondary-color);
+  color: white;
+  border-radius: 50%;
+  width: 1.2em;
+  height: 1.2em;
+  text-align: center;
+}
+
 /* End cart icon styles */
 
 .mission {
