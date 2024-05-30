@@ -6,7 +6,7 @@
     let promise = getData(category);
 </script>
     
-    <p>Top products: {category}</p>
+    <p>{category}</p>
     {#await promise}
         <p>Loading...</p>
     {:then products}
