@@ -1,0 +1,16 @@
+#results {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1em;
+    margin: 1em;
+}
+
+.indentification {
+    text-align: center;
+    margin: auto;
+}
+
+.indentification img {
+    width: 100%;
+    margin: auto;
+}
