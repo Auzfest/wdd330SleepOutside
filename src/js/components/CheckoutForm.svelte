@@ -102,15 +102,15 @@ init();
         <h2>Payment</h2>
         <div>
             <label for="cardnumber">Card Number</label><br>
-            <input type="text" name="cardnumber" id="cardnumber" required/>
+            <input type="text" name="cardNumber" id="cardNumber" required/>
         </div>
         <div>
             <label for="expiration">Expiration</label><br>
             <input type="text" name="expiration" id="expiration" required/>
         </div>
         <div>
-            <label for="security">Security Code</label><br>
-            <input type="text" name="security" id="security" required/>
+            <label for="code">Security Code</label><br>
+            <input type="text" name="code" id="code" required/>
         </div>
     </div>
     <div>
