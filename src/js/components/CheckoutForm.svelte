@@ -1,6 +1,6 @@
 <script>
-import { getLocalStorage } from "../utils.mjs";
-
+import { getLocalStorage, formDataToJSON } from "../utils.mjs";
+import { checkout } from "../externalServices.mjs";
 // props
 // export let key = "so-cart";
 
@@ -33,20 +33,53 @@ const calculateOrdertotal = function () {
   orderTotal = itemTotal + shipping + tax;
 };
 
+// takes the items currently stored in the cart (localstorage) and returns them in a simplified form.
+function packageItems(list) {
+// convert the list of products from localStorage to the simpler form required for the checkout process. Array.map would be perfect for this.
+    const items = list.map(function(item) {
+        return {
+            id: item.Id,
+            name: item.Name,
+            price: item.FinalPrice,
+            quantity: 1
+        }
+    })
+}
+
+async function handleSubmit(e) {
+  // build the data object from the calculated fields, the items in the cart, and the information entered into the form
+  // remember that the form that was submitted can be found two ways...this or e.target 
+  // call the checkout method in our externalServices module and send it our data object.
+  const json = formDataToJSON(this);
+    // add totals, and item details
+    json.orderDate = new Date();
+    json.orderTotal = orderTotal;
+    json.tax = tax;
+    json.shipping = shipping;
+    json.items = packageItems(list);
+    console.log(json);
+    try {
+      const res = await checkout(json);
+      console.log(res);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
 // initial setup
 init(); 
 </script>
 
-<form action="/account/register" method="post" id="login">
+<form name="checkout" on:submit|preventDefault={handleSubmit}>
     <div>
         <h2>Shipping</h2>
         <div>
-            <label for="firstname">First Name</label><br>
-            <input type="text" name="firstname" id="firstname" required />
+            <label for="fname">First Name</label><br>
+            <input type="text" name="fname" id="fname" required />
         </div>
         <div>
-            <label for="lastname">Last Name</label><br>
-            <input type="text" name="lastname" id="lastname" required  />
+            <label for="lname">Last Name</label><br>
+            <input type="text" name="lname" id="lname" required  />
         </div>
         <div>
             <label for="street">Street</label><br>
