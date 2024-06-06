@@ -1,3 +1,8 @@
-import { renderHeaderFooter } from "./utils.mjs";
+import { loadHeaderFooter, getParam } from "./utils.mjs";
+import checkout from "../js/components/CheckoutForm.svelte";
 
-renderHeaderFooter();
+loadHeaderFooter();
+
+new checkout({
+    target: document.querySelector(".checkout"),  
+  });
