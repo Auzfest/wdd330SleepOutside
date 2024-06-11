@@ -1,3 +1,21 @@
+
+h1 {
+    text-align: center;
+    margin: auto;
+}
+
+#searchForm {
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    text-align: center;
+    margin: auto;
+    width: 220px;
+}
+
+#searchForm input {
+    margin-bottom: 1rem;
+}
+
 #results {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -5,12 +23,19 @@
     margin: 1em;
 }
 
-.indentification {
-    text-align: center;
-    margin: auto;
+hr {
+    margin-top: 1rem;
+    border: 10px solid orange;
 }
 
-.indentification img {
-    width: 100%;
+.identification {
+    text-align: center;
     margin: auto;
+    margin-top: 1rem;
+    padding: auto;
+}
+
+.identification img {
+    margin: auto;
+    border: 3px solid black;
 }
