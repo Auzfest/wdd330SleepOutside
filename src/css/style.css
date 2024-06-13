@@ -133,6 +133,18 @@ button {
   animation-fill-mode: forwards;
 }
 
+.cart sup {
+  position: absolute;
+  top: 1px;
+  right: -0.5em;
+  background-color: var(--secondary-color);
+  color: white;
+  border-radius: 50%;
+  width: 1.2em;
+  height: 1.2em;
+  text-align: center;
+}
+
 /* End cart icon styles */
 
 .mission {
@@ -185,6 +197,18 @@ button {
   margin: 0.5em 0;
 }
 
+.product-card__price {
+  text-align: center;
+  margin: auto;
+}
+
+.product-discount__price {
+  background-color: red;
+  color: white;
+  text-align: center;
+  margin: auto;
+}
+
 .card__brand {
   font-size: var(--small-font);
 }
@@ -194,14 +218,11 @@ button {
 }
 /* End product list card */
 
-.product-detail {
+.product-details {
   padding: 1em;
   max-width: 500px;
   margin: auto;
-}
-
-.product-detail img {
-  width: 100%;
+  text-align: center;
 }
 
 /* Start cart list card styles */

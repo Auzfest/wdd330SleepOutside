@@ -40,11 +40,29 @@ function addToCart() {
     
 
 function productDetailsTemplate(product) {
+    if (product.Brand.Name === "The North Face") {
+        product.FinalPrice = (product.FinalPrice - (product.FinalPrice * .1)).toFixed(2);
+        return  `<h3>${product.Brand.Name}</h3>
+        <h2 class="divider">${product.NameWithoutBrand}</h2>
+        <img
+          class="divider"
+          src="${product.Images.PrimaryMedium}"
+          alt="${product.Name}"
+        />
+        <p class="product-discount__price">10% off! $${product.FinalPrice}</p>
+        <p class="product__color">${product.Colors[0].ColorName}</p>
+        <p class="product__description">
+        ${product.DescriptionHtmlSimple}
+        </p>
+        <div class="product-detail__add">
+          <button id="addToCart" data-id="${product.Id}">Add to Cart</button>
+        </div>`;
+    }
     return `<h3>${product.Brand.Name}</h3>
     <h2 class="divider">${product.NameWithoutBrand}</h2>
     <img
       class="divider"
-      src="${product.Image}"
+      src="${product.Images.PrimaryMedium}"
       alt="${product.Name}"
     />
     <p class="product-card__price">$${product.FinalPrice}</p>
