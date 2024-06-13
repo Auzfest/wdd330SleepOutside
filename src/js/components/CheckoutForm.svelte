@@ -1,5 +1,5 @@
 <script>
-import { getLocalStorage, formDataToJSON } from "../utils.mjs";
+import { getLocalStorage, setLocalStorage, formDataToJSON, alertMessage, removeAllAlerts } from "../utils.mjs";
 import { checkout } from "../externalServices.mjs";
 // props
 // export let key = "so-cart";
@@ -50,7 +50,7 @@ async function handleSubmit(e) {
   // build the data object from the calculated fields, the items in the cart, and the information entered into the form
   // remember that the form that was submitted can be found two ways...this or e.target 
   // call the checkout method in our externalServices module and send it our data object.
-  const json = formDataToJSON(this);
+    const json = formDataToJSON(this);
     // add totals, and item details
     json.orderDate = new Date();
     json.orderTotal = orderTotal;
@@ -61,8 +61,16 @@ async function handleSubmit(e) {
     try {
       const res = await checkout(json);
       console.log(res);
+      setLocalStorage("so-cart", []);
+      location.assign("/checkout/success.html");
     } catch (err) {
-      console.log(err);
+      let errmessage = await err.message;
+      removeAllAlerts();
+      for (let key in errmessage) {
+        if (errmessage.hasOwnProperty(key)) {
+          alertMessage(errmessage[key]);
+        }
+    }
     }
   };
 

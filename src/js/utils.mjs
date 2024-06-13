@@ -1,5 +1,6 @@
 import MainFooter from "./components/mainFooter.svelte";
 import MainHeader from "./components/mainHeader.svelte";
+import Alert from "./components/alertMessage.svelte";
 
 // wrapper for querySelector...returns matching element
 export function qs(selector, parent = document) {
@@ -54,4 +55,20 @@ export function formDataToJSON(formElement) {
   });
 
   return convertedJSON;
+}
+
+export function alertMessage(message, scroll=true, duration=5000) {
+  new Alert({
+    target: document.querySelector("body"),
+    anchor: document.querySelector("main"),
+    props: {
+      message,
+    },
+  });
+  if (scroll) window.scrollTo(0, 0);
+}
+
+export function removeAllAlerts() {
+  const alerts = document.querySelectorAll(".alert");
+  alerts.forEach((alert) => alert.remove());
 }
