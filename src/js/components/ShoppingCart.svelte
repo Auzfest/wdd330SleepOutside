@@ -2,6 +2,10 @@
     import { getLocalStorage } from "../utils.mjs";
     const cartItems = getLocalStorage("so-cart");
   </script>
+
+<h3 class="total">
+  cartItems: {cartItems.length}
+</h3>
     
   <ul class="product-list">
     {#if cartItems === null || cartItems.length === 0}
